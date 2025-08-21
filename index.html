@@ -183,6 +183,27 @@
         padding: 18px;
         box-shadow: var(--shadow);
       }
+      /* Hero image caption — always bottom, readable on bright images */
+      .hero-caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.92);
+        padding: 12px 14px;
+        border-radius: 0 0 var(--radius) var(--radius);
+        backdrop-filter: blur(2px);
+      }
+      .hero-caption .title {
+        font-weight: 900;
+        color: var(--green-ink);
+        margin: 0 0 4px 0;
+        font-size: 16px;
+      }
+      .hero-caption .mini {
+        /* reuse existing mini font but ensure contrast */
+        color: #3b4046;
+      }
       .lead {
         color: #2b3036;
       }
@@ -441,6 +462,7 @@
                 align-items: center;
                 justify-content: center;
                 overflow: hidden;
+                position: relative;
                 border-radius: 14px;
                 background: #f6f6f6;
               "
@@ -458,23 +480,14 @@
                   background: #f6f6f6;
                 "
               />
-            </div>
-            <div
-              class="card"
-              style="
-                position: absolute;
-                left: 16px;
-                right: 16px;
-                bottom: 16px;
-                background: #ffffffde;
-              "
-            >
-              <div style="font-weight: 900; color: var(--green-ink)">
-                Message‑First Coaching, Built Around Your Time
-              </div>
-              <div class="mini">
-                2–3 focused sessions/week • simple nutrition • weekly progress —
-                no fluff
+              <div class="hero-caption">
+                <div class="title">
+                  Message‑First Coaching, Built Around Your Time
+                </div>
+                <div class="mini">
+                  2–3 focused sessions/week • simple nutrition • weekly progress
+                  — no fluff
+                </div>
               </div>
             </div>
           </div>
