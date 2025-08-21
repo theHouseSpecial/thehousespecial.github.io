@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dimitar Yanchev · The Prime Form Method</title>
+
+    <!-- Mobile-first + iPhone safe area -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#D62612" />
+
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Transform your body in less time — without living in the gym. Minimal workouts. Maximum return."
+    />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /************************************************************
+     🎨 BRAND PALETTE — Bulgarian flag inspo
+     Change variables below to re‑skin quickly
+    *************************************************************/
+      :root {
+        --white: #ffffff; /* Base */
+        --green: #00966e; /* Accents */
+        --green-ink: #0b5a4b; /* Dark green for headings */
+        --green-soft: #f3fbf8; /* Soft green section bg */
+        --red: #d62612; /* CTA red */
+        --red-hover: #b81e0f; /* Darker CTA hover */
+        --ink: #101215; /* Body text */
+        --muted: #60656c; /* Secondary text */
+        --border: #e8e8e8; /* Light borders */
+        --radius: 16px;
+        --shadow: 0 6px 28px rgba(0, 0, 0, 0.08);
+        --h1: 42px; /* Mobile hero size (scales on desktop) */
+      }
+
+      /* Global */
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+      html,
+      body {
+        margin: 0;
+      }
+      body {
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        color: var(--ink);
+        background: var(--white);
+        line-height: 1.55;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* Layout */
+      .container {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+      section {
+        padding: 56px 0;
+      }
+      .grid {
+        display: grid;
+        gap: 20px;
+      }
+      @media (min-width: 768px) {
+        .grid-2 {
+          grid-template-columns: 1fr 1fr;
+        }
+        .grid-3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .grid-4 {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      .soft {
+        background: var(--green-soft);
+      }
+
+      /* Header */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: #ffffffcc;
+        backdrop-filter: saturate(140%) blur(8px);
+        border-bottom: 1px solid var(--border);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: none;
+      } /* Header logo image: circular, no background */
+      .name {
+        font-family: Montserrat, Inter, sans-serif;
+        font-weight: 900;
+        color: #111;
+        letter-spacing: 0.2px;
+      }
+      .role {
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 900;
+      }
+      nav a {
+        font-weight: 900;
+        color: #2d3238;
+        margin: 0 8px;
+      }
+      nav a:hover {
+        color: var(--green-ink);
+      }
+      .hide-mobile {
+        display: none;
+      }
+      @media (min-width: 900px) {
+        .hide-mobile {
+          display: block;
+        }
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 18px;
+        border-radius: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        transition: transform 0.12s ease, background 0.12s ease,
+          opacity 0.12s ease;
+      }
+      .btn:active {
+        transform: scale(0.98);
+      }
+      .btn-cta {
+        background: var(--red);
+        color: #fff;
+      }
+      .btn-cta:hover {
+        background: var(--red-hover);
+      }
+      .btn-outline {
+        border: 2px solid var(--green);
+        color: var(--green-ink);
+        background: #fff;
+      }
+
+      /* Cards & text bits */
+      .card {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: #fff;
+        padding: 18px;
+        box-shadow: var(--shadow);
+      }
+      .lead {
+        color: #2b3036;
+      }
+      .mini {
+        font-size: 12px;
+        font-weight: 900;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      /* Section heading accent */
+      .heading {
+        position: relative;
+        display: inline-block;
+        padding-top: 8px;
+      }
+      .heading::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 56px;
+        height: 4px;
+        border-radius: 999px;
+        background: var(--green);
+      }
+
+      /* Checks */
+      .check {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 3px solid var(--green);
+        display: inline-block;
+        transform: rotate(45deg);
+        position: relative;
+        flex: 0 0 18px;
+        margin-top: 3px;
+      }
+      .check:after {
+        content: "";
+        position: absolute;
+        left: 3px;
+        top: -2px;
+        width: 4px;
+        height: 10px;
+        border-right: 3px solid var(--green);
+        border-bottom: 3px solid var(--green);
+      }
+
+      /* Inputs */
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d9dee6;
+        border-radius: 12px;
+        font: inherit;
+        background: #fff;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: 2px solid #daf5ee;
+        border-color: #bee9df;
+      }
+      label {
+        font-weight: 900;
+        font-size: 13px;
+        color: #111;
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      /* PAR-Q symmetric checkboxes */
+      .parq-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .parq-item {
+        display: grid;
+        grid-template-columns: 20px 1fr;
+        align-items: start;
+        column-gap: 10px;
+        padding: 10px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: #fff;
+      }
+      .parq-item input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        margin: 2px 0 0 0;
+        accent-color: var(--green);
+      }
+      .parq-item span {
+        font-size: 13px;
+        color: #2e3338;
+      }
+
+      /* Headings */
+      h1 {
+        font-family: Montserrat, Inter, sans-serif;
+        font-weight: 900;
+        color: #111;
+        font-size: var(--h1);
+        line-height: 1.1;
+        margin: 0.2rem 0;
+      }
+      @media (min-width: 900px) {
+        h1 {
+          font-size: 56px;
+        }
+      }
+      h2 {
+        font-family: Montserrat, Inter, sans-serif;
+        font-weight: 900;
+        color: #111;
+        font-size: 28px;
+        margin: 0 0 8px;
+      }
+      @media (min-width: 900px) {
+        h2 {
+          font-size: 34px;
+        }
+      }
+
+      /* Sticky mobile CTA */
+      .sticky-cta {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-top: 1px solid var(--border);
+        background: #ffffffee;
+        backdrop-filter: blur(6px);
+        padding: 10px;
+      }
+      @media (min-width: 768px) {
+        .sticky-cta {
+          display: none;
+        }
+      }
+
+      /* Footer */
+      footer {
+        border-top: 1px solid var(--border);
+        background: #fff;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ================= HEADER ================= -->
+    <header>
+      <div
+        class="container"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 64px;
+        "
+      >
+        <div class="brand">
+          <!-- Header Logo -->
+          <img src="IMG_3627.jpeg" alt="Dimitar Yanchev" class="logo" />
+          <div>
+            <div class="name">Dimitar Yanchev</div>
+            <!-- EDIT HERE -->
+            <div class="role">Body Transformation Specialist</div>
+            <!-- EDIT HERE -->
+          </div>
+        </div>
+        <nav class="hide-mobile" aria-label="Primary">
+          <a href="#method">Method</a>
+          <a href="#proof">Results</a>
+          <a href="#about">About</a>
+          <a href="#offer">Programs</a>
+          <a href="#faq">FAQ</a>
+          <a class="btn btn-cta" href="#apply">Start My Assessment</a>
+          <!-- Catchier CTA -->
+        </nav>
+      </div>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section>
+      <div class="container grid grid-2">
+        <div>
+          <div class="mini" style="color: var(--green-ink)">
+            Dimitar Yanchev · Body Transformation Specialist
+          </div>
+          <h1>THE PRIME FORM METHOD</h1>
+          <div
+            class="lead"
+            style="
+              font-weight: 900;
+              color: #111;
+              font-size: 20px;
+              margin-top: 6px;
+            "
+          >
+            Transform Your Body in Less Time — Without Living in the Gym.
+          </div>
+          <div class="mini" style="margin-top: 6px; color: var(--green-ink)">
+            Minimal Workouts. Maximum Return.
+          </div>
+
+          <p class="lead" style="margin-top: 12px; max-width: 640px">
+            Minimalist training for real results without sacrificing your life.
+            A few focused sessions a week — no gimmicks, no wasted effort, only
+            what works.
+          </p>
+
+          <div
+            style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap"
+          >
+            <a class="btn btn-cta" href="#apply">Start My Assessment</a>
+            <!-- EDIT HERE to change CTA copy -->
+            <a class="btn btn-outline" href="#method">How It Works</a>
+          </div>
+
+          <div style="margin-top: 12px" class="mini">
+            WhatsApp support is reserved for 1:1 coaching clients.
+          </div>
+
+          <div
+            style="
+              margin-top: 14px;
+              display: flex;
+              gap: 14px;
+              flex-wrap: wrap;
+              color: #2b2f34;
+              font-size: 14px;
+            "
+          >
+            <div>★ 5★ client satisfaction</div>
+            <div>★ 90–120 mins total weekly training</div>
+            <div>★ No supplements required</div>
+          </div>
+        </div>
+
+        <!-- Hero Photo -->
+        <div>
+          <div class="card" style="position: relative; overflow: hidden">
+            <!-- Hero Photo: swap IMG_2389.jpeg here if needed -->
+            <div
+              style="
+                width: 100%;
+                aspect-ratio: 4/5;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                border-radius: 14px;
+                background: #f6f6f6;
+              "
+            >
+              <img
+                src="IMG_2389.jpeg"
+                alt="Dimitar Yanchev"
+                style="
+                  object-fit: contain;
+                  width: 100%;
+                  height: auto;
+                  max-height: 100%;
+                  border-radius: 14px;
+                  display: block;
+                  background: #f6f6f6;
+                "
+              />
+            </div>
+            <div
+              class="card"
+              style="
+                position: absolute;
+                left: 16px;
+                right: 16px;
+                bottom: 16px;
+                background: #ffffffde;
+              "
+            >
+              <div style="font-weight: 900; color: var(--green-ink)">
+                Message‑First Coaching, Built Around Your Time
+              </div>
+              <div class="mini">
+                2–3 focused sessions/week • simple nutrition • weekly progress —
+                no fluff
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROBLEM ================= -->
+    <section class="soft" id="problem">
+      <div class="container">
+        <div style="text-align: center">
+          <h2 class="heading">Why Most Men Fail to Transform</h2>
+          <p class="lead">
+            It’s not a lack of effort — it’s the wrong approach: too much
+            volume, too many distractions, and plans designed to sell products,
+            not deliver results.
+          </p>
+        </div>
+
+        <div class="grid grid-4" style="margin-top: 18px">
+          <div class="card">
+            <div class="check"></div>
+            <span style="margin-left: 8px"
+              >Training too often, not intensely enough.</span
+            >
+          </div>
+          <div class="card">
+            <div class="check"></div>
+            <span style="margin-left: 8px"
+              >Following influencer routines built to sell supplements.</span
+            >
+          </div>
+          <div class="card">
+            <div class="check"></div>
+            <span style="margin-left: 8px"
+              >Wasting hours “optimising” instead of training effectively.</span
+            >
+          </div>
+          <div class="card">
+            <div class="check"></div>
+            <span style="margin-left: 8px"
+              >Living in the gym while life passes by.</span
+            >
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px">
+          <a class="btn btn-cta" href="#method">Show Me the Real Way</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= METHOD ================= -->
+    <section id="method">
+      <div class="container grid grid-2">
+        <div>
+          <h2 class="heading">
+            The Prime Form Method — Built for Busy Beginners
+          </h2>
+          <p class="lead">
+            A focused, minimalist system for rapid, sustainable transformation.
+            Train harder for shorter periods, recover fully, progress every
+            week.
+          </p>
+
+          <ul style="list-style: none; padding: 0; margin: 12px 0 0 0">
+            <li style="display: flex; gap: 10px; margin: 10px 0">
+              <div class="check"></div>
+              <span
+                ><b>Focused Training</b> — 2–3 short, efficient sessions;
+                intensity over volume.</span
+              >
+            </li>
+            <li style="display: flex; gap: 10px; margin: 10px 0">
+              <div class="check"></div>
+              <span
+                ><b>Smart Nutrition</b> — Practical, flexible guidelines; no
+                starvation or gimmicks.</span
+              >
+            </li>
+            <li style="display: flex; gap: 10px; margin: 10px 0">
+              <div class="check"></div>
+              <span
+                ><b>Visible Results</b> — Muscle gain + fat loss without losing
+                evenings to the gym.</span
+              >
+            </li>
+            <li style="display: flex; gap: 10px; margin: 10px 0">
+              <div class="check"></div>
+              <span
+                ><b>Beginner Proof</b> — Form-first, clear instruction,
+                trackable progression.</span
+              >
+            </li>
+          </ul>
+
+          <div
+            style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap"
+          >
+            <a class="btn btn-cta" href="#apply">Start My Assessment</a>
+            <a class="btn btn-outline" href="#offer">View Programs</a>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="card">
+          <div class="grid grid-2">
+            <div
+              class="card"
+              style="background: linear-gradient(180deg, #f4fffb, #fff)"
+            >
+              <div class="mini">Avg weekly training</div>
+              <div
+                style="
+                  font-weight: 900;
+                  color: var(--green-ink);
+                  font-size: 20px;
+                "
+              >
+                90–120 mins
+              </div>
+            </div>
+            <div
+              class="card"
+              style="background: linear-gradient(180deg, #f4fffb, #fff)"
+            >
+              <div class="mini">Required supplements</div>
+              <div
+                style="
+                  font-weight: 900;
+                  color: var(--green-ink);
+                  font-size: 20px;
+                "
+              >
+                None
+              </div>
+            </div>
+            <div
+              class="card"
+              style="background: linear-gradient(180deg, #f4fffb, #fff)"
+            >
+              <div class="mini">Coaching style</div>
+              <div
+                style="
+                  font-weight: 900;
+                  color: var(--green-ink);
+                  font-size: 20px;
+                "
+              >
+                Direct & honest
+              </div>
+            </div>
+            <div
+              class="card"
+              style="background: linear-gradient(180deg, #f4fffb, #fff)"
+            >
+              <div class="mini">Designed for</div>
+              <div
+                style="
+                  font-weight: 900;
+                  color: var(--green-ink);
+                  font-size: 20px;
+                "
+              >
+                Driven men ready to commit
+              </div>
+            </div>
+          </div>
+          <div class="card" style="margin-top: 12px; background: #fcfefd">
+            <b style="color: var(--green)">Note:</b> This is not a lifestyle
+            overhaul. It’s a system you can actually stick with.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROOF ================= -->
+    <section id="proof" class="soft">
+      <div class="container">
+        <div style="text-align: center">
+          <h2 class="heading">Real Results. No Excuses.</h2>
+          <p class="lead">
+            Short, efficient training that respects your time — and changes how
+            you look in the mirror.
+          </p>
+        </div>
+
+        <!-- Image Proof Row: two strong visuals -->
+        <div class="grid grid-2" style="margin-top: 16px">
+          <div class="card">
+            <img
+              src="Before after minimal skincare Instagram post.jpg"
+              alt="Before and after transformation — client of Dimitar Yanchev"
+              loading="lazy"
+              style="
+                width: 100%;
+                aspect-ratio: 16/9;
+                object-fit: cover;
+                border-radius: 12px;
+              "
+            />
+            <div class="mini" style="margin-top: 8px">
+              8 weeks — before & after.
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="IMG_3349_Original.jpeg"
+              alt="Back development — transformation progress"
+              loading="lazy"
+              style="
+                width: 100%;
+                aspect-ratio: 4/5;
+                object-fit: cover;
+                border-radius: 12px;
+              "
+            />
+            <div class="mini" style="margin-top: 8px">
+              Back development built with focused pulling and recovery.
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-3" style="margin-top: 18px">
+          <div class="card">
+            <p>
+              “I train 90 minutes a week. Dropped 8kg and look better than
+              ever.”
+            </p>
+            <div class="mini" style="margin-top: 10px">Dan, 38</div>
+          </div>
+          <div class="card">
+            <p>
+              “Finally a program I can stick to. Fast progress without losing my
+              evenings.”
+            </p>
+            <div class="mini" style="margin-top: 10px">Khalid, 32</div>
+          </div>
+          <div class="card">
+            <p>
+              “I wasted years on influencer plans. This cut through the noise
+              and worked.”
+            </p>
+            <div class="mini" style="margin-top: 10px">Marcus, 41</div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 18px">
+          <a class="btn btn-cta" href="#apply">Start My Assessment</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT (your copy) ================= -->
+    <section id="about">
+      <div class="container grid grid-2">
+        <div>
+          <h2 class="heading">About Me</h2>
+          <p class="lead">
+            I train men who are done with excuses and finally ready to commit.
+            Not “thinking about it.” Not “starting Monday.” Commit. Because the
+            truth is, you’re not too busy — you’ve just been sold the lie that
+            health is optional. It isn’t.
+          </p>
+          <p class="lead">
+            Here’s the part no one likes to say out loud: fitness is an
+            industry. And industries don’t care about your long-term health —
+            they care about keeping you on the hook. They hype magic powders,
+            flashy programs, and influencer routines that leave you drained and
+            doubting yourself. They push “more” — more supplements, more
+            workouts, more optimization — until you’re burnt out and convinced
+            you’re the problem.
+          </p>
+          <p class="lead"><b>You’re not the problem.</b></p>
+          <p class="lead">
+            My approach is different. Minimalist. Focused. Human. I strip away
+            the nonsense and give you exactly what works, so you don’t have to.
+            Training and nutrition built for your lifestyle and your goals. No
+            ten-step rituals. No two-hour daily workouts. Just the essentials
+            that move the needle — then you get back to living your life.
+          </p>
+          <p class="lead">
+            Fitness isn’t meant to take over your existence. It’s meant to make
+            your existence better. If you’re ready to stop being a cog in the
+            industry machine and start building muscle, burning fat, and getting
+            healthy — I’ll show you the way. No gimmicks. No tricks.
+          </p>
+          <p class="lead">
+            <b
+              >The goal isn’t to do the most. The goal is to do what matters.</b
+            >
+          </p>
+
+          <div style="margin-top: 12px" class="mini">
+            WhatsApp support is available 24/7 for 1:1 coaching clients.
+          </div>
+
+          <div style="margin-top: 14px">
+            <a class="btn btn-cta" href="#apply">Start My Assessment</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= OFFER (GBP) ================= -->
+    <section id="offer" class="soft">
+      <div class="container">
+        <div style="text-align: center">
+          <h2 class="heading">Choose Your Path</h2>
+          <p class="lead">
+            Clear options. No gimmicks. Programs for momentum, coaching for
+            mastery.
+          </p>
+        </div>
+
+        <div class="grid grid-3" style="margin-top: 18px">
+          <!-- Program 1 -->
+          <div class="card">
+            <div class="mini" style="color: var(--green-ink)">Program</div>
+            <div
+              style="
+                font-weight: 900;
+                color: #111;
+                font-size: 20px;
+                margin-top: 4px;
+              "
+            >
+              The Prime Form Method
+            </div>
+            <p class="lead" style="font-size: 14px; margin-top: 8px">
+              Minimalist transformation training (2–3 sessions/week). Built for
+              busy beginners.
+            </p>
+            <ul style="list-style: none; padding: 0; margin: 10px 0 0 0">
+              <li style="display: flex; gap: 10px; margin: 8px 0">
+                <div class="check"></div>
+                <span>Complete training system</span>
+              </li>
+              <li style="display: flex; gap: 10px; margin: 8px 0">
+                <div class="check"></div>
+                <span>Progression built‑in</span>
+              </li>
+              <li style="display: flex; gap: 10px; margin: 8px 0">
+                <div class="check"></div>
+                <span>Form cues that actually help</span>
+              </li>
+            </ul>
+            <div
+              style="
+                margin-top: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <div class="mini"><b>£37</b> one‑time</div>
+              <a
+                class="btn btn-cta"
+                href="mailto:dimitaryanchevv@gmail.com?subject=Purchase:%20The%20Prime%20Form%20Method%20(GBP%2037)&body=Hi%20Dimitar,%0A%0AI'd%20like%20to%20purchase%20The%20Prime%20Form%20Method%20(GBP%2037).%0AName:%20%0AEmail:%20%0A"
+                >Purchase Program</a
+              >
+            </div>
+          </div>
+
+          <!-- Program 2 -->
+          <div class="card">
+            <div class="mini" style="color: var(--green-ink)">Program</div>
+            <div
+              style="
+                font-weight: 900;
+                color: #111;
+                font-size: 20px;
+                margin-top: 4px;
+              "
+            >
+              Prime Form: Lean Blueprint
+            </div>
+            <p class="lead" style="font-size: 14px; margin-top: 8px">
+              Nutrition & fat‑loss system for busy men. Simple rules, visible
+              change.
+            </p>
+            <ul style="list-style: none; padding: 0; margin: 10px 0 0 0">
+              <li style="display: flex; gap: 10px; margin: 8px 0">
+                <div class="check"></div>
+                <span>Simple meal structure</span>
+              </li>
+              <li style="display: flex; gap: 10px; margin: 8px 0">
+                <div class="check"></div>
+                <span>Hunger control, not starvation</span>
+              </li>
+              <li style="display: flex; gap: 10px; margin: 8px 0">
+                <div class="check"></div>
+                <span>Travel & work‑friendly</span>
+              </li>
+            </ul>
+            <div
+              style="
+                margin-top: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <div class="mini"><b>£37</b> one‑time</div>
+              <a
+                class="btn btn-cta"
+                href="mailto:dimitaryanchevv@gmail.com?subject=Purchase:%20Prime%20Form%20Lean%20Blueprint%20(GBP%2037)&body=Hi%20Dimitar,%0A%0AI'd%20like%20to%20purchase%20Prime%20Form:%20Lean%20Blueprint%20(GBP%2037).%0AName:%20%0AEmail:%20%0A"
+                >Purchase Program</a
+              >
+            </div>
+          </div>
+
+          <!-- Bundle -->
+          <div class="card">
+            <div class="mini" style="color: var(--green-ink)">Bundle</div>
+            <div
+              style="
+                font-weight: 900;
+                color: #111;
+                font-size: 20px;
+                margin-top: 4px;
+              "
+            >
+              Prime Form Starter Pack
+            </div>
+            <p class="lead" style="font-size: 14px; margin-top: 8px">
+              Training + Nutrition + Recovery. Everything you need to start
+              right.
+            </p>
+            <ul style="list-style: none; padding: 0; margin: 10px 0 0 0">
+              <li style="display: flex; gap: 10px; margin: 8px 0">
+                <div class="check"></div>
+                <span>Both systems included</span>
+              </li>
+              <li style="display: flex; gap: 10px; margin: 8px 0">
+                <div class="check"></div>
+                <span>Recovery guidelines</span>
+              </li>
+              <li style="display: flex; gap: 10px; margin: 8px 0">
+                <div class="check"></div>
+                <span>Save vs buying separately</span>
+              </li>
+            </ul>
+            <div
+              style="
+                margin-top: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <div class="mini"><b>£97</b> one‑time</div>
+              <a
+                class="btn btn-cta"
+                href="mailto:dimitaryanchevv@gmail.com?subject=Purchase:%20Prime%20Form%20Starter%20Pack%20(GBP%2097)&body=Hi%20Dimitar,%0A%0AI'd%20like%20to%20purchase%20the%20Prime%20Form%20Starter%20Pack%20(GBP%2097).%0AName:%20%0AEmail:%20%0A"
+                >Purchase Program</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Coaching row -->
+        <div class="card" style="margin-top: 20px">
+          <div class="grid grid-2">
+            <div>
+              <div class="mini" style="color: var(--green-ink)">
+                Premium Coaching
+              </div>
+              <div
+                style="
+                  font-weight: 900;
+                  color: #111;
+                  font-size: 22px;
+                  margin-top: 4px;
+                "
+              >
+                Prime Form Mentorship (1:1 Coaching)
+              </div>
+              <p class="lead" style="font-size: 14px; margin-top: 8px">
+                Direct access to me. Custom plan, weekly progress checks,
+                message‑first support.
+              </p>
+              <ul style="list-style: none; padding: 0; margin: 10px 0 0 0">
+                <li style="display: flex; gap: 10px; margin: 8px 0">
+                  <div class="check"></div>
+                  <span>Custom training & nutrition</span>
+                </li>
+                <li style="display: flex; gap: 10px; margin: 8px 0">
+                  <div class="check"></div>
+                  <span>Weekly feedback & adjustments</span>
+                </li>
+                <li style="display: flex; gap: 10px; margin: 8px 0">
+                  <div class="check"></div>
+                  <span>WhatsApp reserved for clients</span>
+                </li>
+              </ul>
+            </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 10px;
+              "
+            >
+              <div class="mini"><b>£247/month</b> · limited spots</div>
+              <a class="btn btn-cta" href="#apply">Start My Assessment</a>
+              <div class="mini">
+                If we’re a fit, you’ll be invited to join. No pressure.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section id="faq">
+      <div class="container">
+        <div style="text-align: center">
+          <h2 class="heading">Questions, Answered</h2>
+          <p class="lead">
+            Straight answers so you know exactly what you’re getting.
+          </p>
+        </div>
+        <div class="grid grid-2" style="margin-top: 18px">
+          <details class="card">
+            <summary style="font-weight: 900">
+              Do I need hours every week?
+            </summary>
+            <div class="mini" style="margin-top: 8px">
+              No. Most train 90–120 minutes total per week across 2–3 focused
+              sessions.
+            </div>
+          </details>
+          <details class="card">
+            <summary style="font-weight: 900">
+              Do I need to be fit already?
+            </summary>
+            <div class="mini" style="margin-top: 8px">
+              No. Built for beginners. We start where you are and progress
+              weekly.
+            </div>
+          </details>
+          <details class="card">
+            <summary style="font-weight: 900">Do I need supplements?</summary>
+            <div class="mini" style="margin-top: 8px">
+              No. Optional, not required. We focus on training, recovery, and
+              simple nutrition.
+            </div>
+          </details>
+          <details class="card">
+            <summary style="font-weight: 900">
+              What if I’ve tried and failed before?
+            </summary>
+            <div class="mini" style="margin-top: 8px">
+              That’s why this exists — to strip away what never worked and
+              replace it with what does.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= APPLY / INTAKE (form-only) ================= -->
+    <section id="apply" class="soft">
+      <div class="container grid grid-2">
+        <!-- Left: explanation -->
+        <div>
+          <h2 class="heading">Start My Assessment</h2>
+          <p class="lead">
+            Share your details below. I’ll review and reply by email with next
+            steps. If we’re a fit, you’ll be invited to coaching.
+          </p>
+
+          <div class="card" style="margin-top: 12px; background: #fcfefd">
+            <div style="font-weight: 900; color: #111">What happens next?</div>
+            <ul style="margin-top: 6px; padding-left: 18px">
+              <li>I read your details and reply personally.</li>
+              <li>If it’s a fit, you’ll get a simple plan to start.</li>
+              <li>WhatsApp support is reserved for coaching clients.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right: Intake + PAR-Q (Formspree) -->
+        <form class="card" id="intakeForm" method="POST" novalidate>
+          <!-- Personal -->
+          <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 12px">
+            <div>
+              <label>First name</label>
+              <input name="first_name" required autocomplete="given-name" />
+            </div>
+            <div>
+              <label>Last name</label>
+              <input name="last_name" required autocomplete="family-name" />
+            </div>
+            <div>
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                required
+                autocomplete="email"
+                inputmode="email"
+              />
+            </div>
+            <div>
+              <label>Phone</label>
+              <input
+                type="tel"
+                name="phone"
+                autocomplete="tel"
+                placeholder="07…"
+              />
+            </div>
+          </div>
+
+          <!-- Metrics -->
+          <div
+            class="grid"
+            style="
+              grid-template-columns: 1fr 1fr 1fr;
+              gap: 12px;
+              margin-top: 10px;
+            "
+          >
+            <div>
+              <label>Age</label>
+              <input type="number" name="age" min="13" max="90" required />
+            </div>
+            <div>
+              <label>Height (cm)</label>
+              <input
+                type="number"
+                name="height_cm"
+                min="120"
+                max="230"
+                required
+              />
+            </div>
+            <div>
+              <label>Weight (kg)</label>
+              <input
+                type="number"
+                name="weight_kg"
+                min="30"
+                max="250"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Gender + Experience -->
+          <div
+            class="grid"
+            style="grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px"
+          >
+            <div>
+              <label>Gender</label>
+              <select name="gender" required>
+                <option value="" disabled selected>Select…</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Prefer not to say</option>
+              </select>
+            </div>
+            <div>
+              <label>Training experience</label>
+              <select name="experience" required>
+                <option value="" disabled selected>Select…</option>
+                <option>Beginner (0–6 months)</option>
+                <option>Intermediate (6–24 months)</option>
+                <option>Advanced (2+ years)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Goals -->
+          <div style="margin-top: 10px">
+            <label>Your goals (be specific)</label>
+            <textarea
+              name="goals"
+              rows="3"
+              placeholder="Fat loss, build muscle, look athletic, time constraints…"
+              required
+            ></textarea>
+          </div>
+
+          <!-- Injuries -->
+          <div style="margin-top: 10px">
+            <label>Injuries or limitations</label>
+            <textarea
+              name="injuries"
+              rows="2"
+              placeholder="Back pain, knee issues, etc. If none, type 'None'."
+              required
+            ></textarea>
+          </div>
+
+          <!-- PAR‑Q -->
+          <div style="margin-top: 16px">
+            <h3
+              style="
+                margin: 0 0 6px;
+                font-size: 18px;
+                font-weight: 900;
+                color: #111;
+              "
+            >
+              PAR‑Q (Physical Activity Readiness Questionnaire)
+            </h3>
+          </div>
+          <div class="mini" style="margin-bottom: 8px">
+            If you answer “Yes” to any, we may request GP clearance before
+            training.
+          </div>
+
+          <div class="parq-list">
+            <label class="parq-item">
+              <input type="checkbox" name="parq_known_heart" />
+              <span
+                >Has your doctor ever said you have a heart condition or that
+                you should only do physical activity recommended by a
+                doctor?</span
+              >
+            </label>
+            <label class="parq-item">
+              <input type="checkbox" name="parq_chest_exercise" />
+              <span
+                >Do you feel pain in your chest when you do physical
+                activity?</span
+              >
+            </label>
+            <label class="parq-item">
+              <input type="checkbox" name="parq_chest_rest" />
+              <span
+                >In the past month, have you had chest pain when you were not
+                doing physical activity?</span
+              >
+            </label>
+            <label class="parq-item">
+              <input type="checkbox" name="parq_dizziness" />
+              <span
+                >Do you lose balance because of dizziness or ever lose
+                consciousness?</span
+              >
+            </label>
+            <label class="parq-item">
+              <input type="checkbox" name="parq_bone_joint" />
+              <span
+                >Do you have a bone or joint problem that could be made worse by
+                a change in your physical activity?</span
+              >
+            </label>
+            <label class="parq-item">
+              <input type="checkbox" name="parq_prescription" />
+              <span
+                >Is your doctor currently prescribing drugs (for example, water
+                pills) for blood pressure or a heart condition?</span
+              >
+            </label>
+            <label class="parq-item">
+              <input type="checkbox" name="parq_other_reason" />
+              <span
+                >Do you know of any other reason why you should not do physical
+                activity?</span
+              >
+            </label>
+          </div>
+
+          <!-- Consent -->
+          <div
+            style="
+              margin-top: 14px;
+              font-size: 12px;
+              color: #40454c;
+              line-height: 1.45;
+            "
+          >
+            <label style="display: flex; gap: 10px; align-items: flex-start">
+              <input
+                type="checkbox"
+                id="consent"
+                required
+                style="
+                  accent-color: var(--green);
+                  width: 18px;
+                  height: 18px;
+                  margin-top: 2px;
+                "
+              />
+              <span
+                >I confirm the information provided is accurate and I consent to
+                be contacted by email about coaching.</span
+              >
+            </label>
+            <div class="mini" style="margin-top: 6px">
+              Your data is used only to assess suitability and to contact you.
+              You can request deletion at any time.
+            </div>
+          </div>
+
+          <!-- Signature & date -->
+          <div
+            class="grid"
+            style="grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px"
+          >
+            <div>
+              <label>Type your full name as signature</label>
+              <input name="signature" required />
+            </div>
+            <div>
+              <label>Date</label>
+              <input type="date" name="date_signed" required />
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <div
+            style="
+              margin-top: 14px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 10px;
+              flex-wrap: wrap;
+            "
+          >
+            <button class="btn btn-cta" type="submit">
+              Start My Assessment
+            </button>
+            <div class="mini">
+              Or email:
+              <span style="white-space: nowrap">dimitaryanchevv@gmail.com</span>
+            </div>
+          </div>
+          <div
+            id="formMsg"
+            class="mini"
+            style="margin-top: 8px; color: var(--green-ink)"
+          ></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ================= POLICIES / LEGAL ================= -->
+    <section id="policies">
+      <div class="container">
+        <div style="text-align: center">
+          <h2 class="heading">Policies & Legal</h2>
+          <p class="lead">
+            Plain-English terms so you know exactly what you’re agreeing to.
+          </p>
+        </div>
+
+        <div class="grid grid-2" style="margin-top: 18px">
+          <!-- Privacy -->
+          <details class="card" id="privacy">
+            <summary style="font-weight: 900">Privacy Policy</summary>
+            <div class="mini" style="margin-top: 8px">
+              I collect only the information you submit (name, contact details,
+              goals, PAR‑Q answers) to assess suitability and to contact you
+              about coaching. Data is not shared or sold. You may request
+              deletion at any time by emailing
+              <a href="mailto:dimitaryanchevv@gmail.com"
+                >dimitaryanchevv@gmail.com</a
+              >. This site uses no tracking cookies beyond basic,
+              privacy‑friendly analytics if added later.
+            </div>
+          </details>
+
+          <!-- Terms -->
+          <details class="card" id="terms">
+            <summary style="font-weight: 900">Terms of Service</summary>
+            <div class="mini" style="margin-top: 8px">
+              Coaching provides education and guidance only. Results vary based
+              on adherence, genetics, and lifestyle; no guarantees are made. You
+              must be 18+ and truthfully complete the PAR‑Q. If any answer is
+              “Yes,” medical clearance may be required before participation.
+              Message response times are reasonable business hours unless
+              otherwise agreed.
+            </div>
+          </details>
+
+          <!-- Medical Disclaimer -->
+          <details class="card" id="disclaimer">
+            <summary style="font-weight: 900">Medical Disclaimer</summary>
+            <div class="mini" style="margin-top: 8px">
+              I am not a physician and this is not medical advice. If you have
+              (or suspect you have) a medical condition, consult your GP or a
+              qualified healthcare professional before following any training or
+              nutrition guidance. Stop any activity that causes pain, dizziness,
+              or shortness of breath and seek medical attention as needed.
+            </div>
+          </details>
+
+          <!-- Liability & Assumption of Risk -->
+          <details class="card" id="liability">
+            <summary style="font-weight: 900">
+              Liability & Assumption of Risk
+            </summary>
+            <div class="mini" style="margin-top: 8px">
+              By purchasing programs or coaching, you acknowledge inherent risks
+              associated with exercise and accept full responsibility for your
+              participation. To the maximum extent permitted by law, you agree
+              to release and hold harmless Dimitar Yanchev from any claims
+              arising from your use of the programs or coaching, except where
+              caused by gross negligence or unlawful conduct.
+            </div>
+          </details>
+
+          <!-- Refunds & Cancellations -->
+          <details class="card" id="refunds">
+            <summary style="font-weight: 900">Refunds & Cancellations</summary>
+            <div class="mini" style="margin-top: 8px">
+              Digital programs (downloads) are <b>non‑refundable</b> once
+              delivered. Coaching is billed monthly and can be cancelled any
+              time before the next billing date. Access to client resources and
+              support ends when the billing period ends.
+            </div>
+          </details>
+
+          <!-- Enquiries -->
+          <details class="card" id="enquiries">
+            <summary style="font-weight: 900">Enquiries & Support</summary>
+            <div class="mini" style="margin-top: 8px">
+              For any questions about your purchase, data, or coaching, email
+              <a href="mailto:dimitaryanchevv@gmail.com"
+                >dimitaryanchevv@gmail.com</a
+              >. I aim to respond within 24 hours on business days.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+      <div
+        class="container"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 8px;
+          padding: 22px 0;
+          flex-wrap: wrap;
+        "
+      >
+        <div class="mini">
+          © <span id="year"></span> Dimitar Yanchev. All rights reserved.
+        </div>
+        <div class="mini">
+          Built for men who want results without living in the gym.
+        </div>
+        <div class="mini">
+          Enquiries:
+          <a href="mailto:dimitaryanchevv@gmail.com"
+            >dimitaryanchevv@gmail.com</a
+          >
+          · <a href="#privacy">Privacy</a> · <a href="#terms">Terms</a> ·
+          <a href="#refunds">Refunds</a> · <a href="#disclaimer">Disclaimer</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ================= STICKY CTA (mobile) ================= -->
+    <div class="sticky-cta">
+      <div class="container" style="padding: 0">
+        <a class="btn btn-cta" href="#apply" style="width: 100%"
+          >Start My Assessment</a
+        >
+      </div>
+    </div>
+
+    <!-- ================= JS: Formspree + niceties ================= -->
+    <script>
+      // Formspree wiring (already set to your form)
+      const FORMSPREE_ID = "xzzvnpog"; // EDIT HERE if you create a new form
+      const form = document.getElementById("intakeForm");
+      const msg = document.getElementById("formMsg");
+      form.setAttribute("action", `https://formspree.io/f/${FORMSPREE_ID}`);
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        document.activeElement.blur?.(); // iPhone keyboard fix
+        msg.style.color = "var(--green-ink)";
+        msg.textContent = "Sending…";
+        try {
+          const data = new FormData(form);
+          data.append("_subject", "New Prime Form Assessment"); // optional subject
+          const res = await fetch(form.action, {
+            method: "POST",
+            body: data,
+            headers: { Accept: "application/json" },
+          });
+          if (res.ok) {
+            form.reset();
+            msg.style.color = "var(--green-ink)";
+            msg.textContent =
+              "Thanks! I’ll review your details and email you shortly.";
+          } else {
+            msg.style.color = "var(--red)";
+            msg.textContent = "Something went wrong. Please email me directly.";
+          }
+        } catch {
+          msg.style.color = "var(--red)";
+          msg.textContent = "Network error. Please email me directly.";
+        }
+      });
+
+      // Footer year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // iPhone-friendly input modes
+      document.querySelectorAll("input,textarea,select").forEach((el) => {
+        const t = (el.getAttribute("type") || "text").toLowerCase();
+        el.setAttribute(
+          "inputmode",
+          t === "email"
+            ? "email"
+            : t === "number"
+            ? "numeric"
+            : t === "tel"
+            ? "tel"
+            : "text"
+        );
+        el.setAttribute(
+          "autocomplete",
+          el.getAttribute("autocomplete") || "on"
+        );
+      });
+    </script>
+  </body>
+</html>
