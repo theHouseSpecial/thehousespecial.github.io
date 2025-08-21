@@ -105,6 +105,13 @@
         backdrop-filter: saturate(140%) blur(8px);
         border-bottom: 1px solid var(--border);
       }
+      /* Make header content full-width on mobile (no 90% look) */
+      header > .container {
+        max-width: 100%;
+        width: 100%;
+        padding-left: calc(16px + env(safe-area-inset-left));
+        padding-right: calc(16px + env(safe-area-inset-right));
+      }
       .brand {
         display: flex;
         align-items: center;
