@@ -76,12 +76,12 @@
         padding: 0 16px;
       }
 
-      /* Hero-only right padding to avoid Safari cut-off on mobile */
+      /* Hero-only right padding — removed to keep gutters symmetric */
       .hero-safe {
       }
       @media (max-width: 600px) {
         .hero-safe {
-          padding-right: max(18px, calc(14px + env(safe-area-inset-right)));
+          padding-right: 0; /* container handles safe-area padding on both sides */
         }
       }
 
