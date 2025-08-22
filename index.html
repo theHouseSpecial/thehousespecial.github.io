@@ -73,26 +73,15 @@
       .container {
         max-width: 1120px;
         margin: 0 auto;
-        padding: 0 16px;
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
       }
 
       /* Hero-only right padding — removed to keep gutters symmetric */
       .hero-safe {
       }
-      @media (max-width: 600px) {
-        .hero-safe {
-          padding-right: 0; /* container handles safe-area padding on both sides */
-        }
-      }
 
       /* Mobile gutters + safe wrapping */
-      @media (max-width: 600px) {
-        /* Give non-full-bleed sections healthier side padding on phones */
-        .container:not(.full-bleed) {
-          padding-left: max(14px, calc(8px + env(safe-area-inset-left)));
-          padding-right: max(14px, calc(8px + env(safe-area-inset-right)));
-        }
-      }
       /* Prevent edge collisions from long words/URLs */
       :where(h1, h2, p, .lead, .mini) {
         overflow-wrap: anywhere;
@@ -129,6 +118,10 @@
       .grid {
         display: grid;
         gap: 20px;
+      }
+      /* Stop grid children from overflowing the viewport on iOS/Safari */
+      .grid > * {
+        min-width: 0;
       }
       @media (min-width: 768px) {
         .grid-2 {
@@ -242,6 +235,7 @@
         background: #fff;
         padding: 18px;
         box-shadow: var(--shadow);
+        overflow: hidden; /* keep inner content clipped */
       }
       /* Hero image (better control on iPhone): use <img> with object-position */
       .hero {
