@@ -164,12 +164,13 @@
         gap: 12px;
       }
       .logo {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        border-radius: 12px; /* rounded square */
         object-fit: cover;
+        object-position: center top; /* keep head visible */
         background: none;
-      } /* Header logo image: circular, no background */
+      } /* Header logo image: rounded square, no background */
       .name {
         font-family: Montserrat, Inter, sans-serif;
         font-weight: 900;
@@ -451,7 +452,7 @@
       >
         <div class="brand">
           <!-- Header Logo -->
-          <img src="IMG_3627.jpeg" alt="Dimitar Yanchev" class="logo" />
+          <img src="IMG_0071.jpeg" alt="Dimitar Yanchev" class="logo" />
           <div>
             <div class="name">Dimitar Yanchev</div>
             <!-- EDIT HERE -->
@@ -536,7 +537,7 @@
           >
             <!-- Hero Photo with controlled crop -->
             <div class="hero">
-              <img class="hero-img" src="IMG_2389.jpeg" alt="Dimitar Yanchev" />
+              <img class="hero-img" src="IMG_2407.jpeg" alt="Dimitar Yanchev" />
               <div class="hero-caption">
                 <div class="title">
                   Message‑First Coaching, Built Around Your Time
@@ -1525,6 +1526,38 @@
     <script>
       // Formspree wiring (already set to your form)
       const FORMSPREE_ID = "xzzvnpog"; // EDIT HERE if you create a new form
+      // Robust hero image loader with case/extension fallbacks
+      (function () {
+        const hero = document.querySelector(".hero-img");
+        if (!hero) return;
+        const original = hero.getAttribute("src") || "IMG_2407.jpeg";
+        const candidates = [
+          original,
+          // common case/extension variations
+          "IMG_2407.JPG",
+          "IMG_2407.jpg",
+          "IMG_2407.JPEG",
+          "img_2407.jpeg",
+          "img_2407.JPG",
+        ];
+        let i = 0;
+        function tryNext() {
+          if (i >= candidates.length) {
+            console.warn(
+              "[hero-img] Could not load any candidate:",
+              candidates
+            );
+            return;
+          }
+          const src = candidates[i++];
+          hero.src = src + (src.includes("?") ? "" : "?cb=" + Date.now());
+        }
+        hero.addEventListener("error", tryNext);
+        // If the first attempt fails (e.g., cached 404), force a retry shortly
+        setTimeout(() => {
+          if (!hero.complete || hero.naturalWidth === 0) tryNext();
+        }, 100);
+      })();
       const form = document.getElementById("intakeForm");
       const msg = document.getElementById("formMsg");
       form.setAttribute("action", `https://formspree.io/f/${FORMSPREE_ID}`);
