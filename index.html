@@ -74,6 +74,22 @@
         margin: 0 auto;
         padding: 0 16px;
       }
+
+      /* Full-bleed utility for true edge-to-edge rows (iPhone-safe) */
+      .full-bleed {
+        width: 100dvw; /* dynamic viewport fixes iOS URL bar issues */
+        margin-left: calc(50% - 50dvw);
+        margin-right: calc(50% - 50dvw);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+      }
+      @supports not (width: 100dvw) {
+        .full-bleed {
+          width: 100vw;
+          margin-left: calc(50% - 50vw);
+          margin-right: calc(50% - 50vw);
+        }
+      }
       section {
         padding: 56px 0;
       }
@@ -109,8 +125,8 @@
       header > .container {
         max-width: 100%;
         width: 100%;
-        padding-left: calc(16px + env(safe-area-inset-left));
-        padding-right: calc(16px + env(safe-area-inset-right));
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
       }
       .brand {
         display: flex;
@@ -394,7 +410,7 @@
     <!-- ================= HEADER ================= -->
     <header>
       <div
-        class="container"
+        class="container full-bleed"
         style="
           display: flex;
           align-items: center;
@@ -1467,7 +1483,7 @@
 
     <!-- ================= STICKY CTA (mobile) ================= -->
     <div class="sticky-cta">
-      <div class="container" style="padding: 0">
+      <div class="container full-bleed" style="padding: 0">
         <a class="btn btn-cta" href="#apply" style="width: 100%"
           >Start My Assessment</a
         >
