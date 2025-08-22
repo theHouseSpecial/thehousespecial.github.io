@@ -76,6 +76,15 @@
         padding: 0 16px;
       }
 
+      /* Hero-only right padding to avoid Safari cut-off on mobile */
+      .hero-safe {
+      }
+      @media (max-width: 600px) {
+        .hero-safe {
+          padding-right: max(18px, calc(14px + env(safe-area-inset-right)));
+        }
+      }
+
       /* Mobile gutters + safe wrapping */
       @media (max-width: 600px) {
         /* Give non-full-bleed sections healthier side padding on phones */
@@ -88,6 +97,10 @@
       :where(h1, h2, p, .lead, .mini) {
         overflow-wrap: anywhere;
         word-break: normal;
+      }
+      h1,
+      .lead {
+        hyphens: auto;
       }
       /* Optional utility to nudge inner blocks without touching layout */
       .mobile-pad {
@@ -246,12 +259,12 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: 50% 8%; /* keep face/headroom visible */
+        object-position: 50% 6%; /* keep face/headroom visible */
         display: block;
       }
       @media (max-width: 600px) {
         .hero-img {
-          object-position: 50% 4%; /* more headroom on phones */
+          object-position: 50% 2%; /* more headroom on phones */
         }
       }
       /* Hero image caption — always bottom, readable on bright images */
@@ -466,7 +479,7 @@
 
     <!-- ================= HERO ================= -->
     <section>
-      <div class="container grid grid-2">
+      <div class="container grid grid-2 hero-safe">
         <div>
           <div class="mini" style="color: var(--green-ink)">
             Dimitar Yanchev · Body Transformation Specialist
