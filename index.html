@@ -75,6 +75,25 @@
         padding: 0 16px;
       }
 
+      /* Mobile gutters + safe wrapping */
+      @media (max-width: 600px) {
+        /* Give non-full-bleed sections healthier side padding on phones */
+        .container:not(.full-bleed) {
+          padding-left: max(20px, calc(12px + env(safe-area-inset-left)));
+          padding-right: max(20px, calc(12px + env(safe-area-inset-right)));
+        }
+      }
+      /* Prevent edge collisions from long words/URLs */
+      :where(h1, h2, p, .lead, .mini) {
+        overflow-wrap: anywhere;
+        word-break: normal;
+      }
+      /* Optional utility to nudge inner blocks without touching layout */
+      .mobile-pad {
+        padding-left: clamp(8px, 3vw, 14px);
+        padding-right: clamp(8px, 3vw, 14px);
+      }
+
       /* Full-bleed utility for true edge-to-edge rows (iPhone-safe) */
       .full-bleed {
         width: 100dvw; /* dynamic viewport fixes iOS URL bar issues */
@@ -443,7 +462,7 @@
     <!-- ================= HERO ================= -->
     <section>
       <div class="container grid grid-2">
-        <div>
+        <div class="mobile-pad">
           <div class="mini" style="color: var(--green-ink)">
             Dimitar Yanchev · Body Transformation Specialist
           </div>
@@ -1460,7 +1479,7 @@
           align-items: center;
           justify-content: space-between;
           gap: 8px;
-          padding: 22px 0;
+          padding: 22px 16px; /* add side padding so text never hugs edges */
           flex-wrap: wrap;
         "
       >
