@@ -254,12 +254,12 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: 50% 6%; /* keep face/headroom visible */
+        object-position: 70% 6%;
         display: block;
       }
       @media (max-width: 600px) {
         .hero-img {
-          object-position: 50% 2%; /* more headroom on phones */
+          object-position: 70% 2%;
         }
       }
       /* Hero image caption — always bottom, readable on bright images */
@@ -292,6 +292,21 @@
         color: var(--muted);
         text-transform: uppercase;
         letter-spacing: 0.08em;
+      }
+
+      /* Proof: before/after image crops so faces remain visible */
+      .proof-beforeafter {
+        width: 100%;
+        aspect-ratio: 1 / 1; /* Instagram post is square; show more headroom */
+        object-fit: cover;
+        object-position: 50% 18%; /* bias towards top so faces show */
+        border-radius: 12px;
+        display: block;
+      }
+      @media (max-width: 600px) {
+        .proof-beforeafter {
+          object-position: 50% 12%;
+        }
       }
 
       /* Section heading accent */
@@ -489,16 +504,17 @@
               margin-top: 6px;
             "
           >
-            Transform Your Body in Less Time — Without Living in the Gym.
+            Progress comes from doing what works. And sticking with it.
           </div>
           <div class="mini" style="margin-top: 6px; color: var(--green-ink)">
-            Minimal Workouts. Maximum Return.
+            I can help you remove the noise and get in shape.
           </div>
 
           <p class="lead" style="margin-top: 12px; max-width: 640px">
-            Minimalist training for real results without sacrificing your life.
-            A few focused sessions a week — no gimmicks, no wasted effort, only
-            what works.
+            Simple training principles for real results without sacrificing your
+            life. You don't buy "another program" or start this "new diet", I am
+            NOT reinventing the wheel. You are buying years of experience and
+            real knowledge stripped down of trends.
           </p>
 
           <div
@@ -540,11 +556,12 @@
               <img class="hero-img" src="IMG_2407.jpeg" alt="Dimitar Yanchev" />
               <div class="hero-caption">
                 <div class="title">
-                  Message‑First Coaching, Built Around Your Time
+                  Get in Shape, Without Sacrificing your whole lifestyle. Be
+                  Yourself, Do what Works.
                 </div>
                 <div class="mini">
                   2–3 focused sessions/week • simple nutrition • weekly progress
-                  — no fluff
+                  • 24/7 support
                 </div>
               </div>
             </div>
@@ -557,38 +574,61 @@
     <section class="soft" id="problem">
       <div class="container">
         <div style="text-align: center">
-          <h2 class="heading">Why Most Men Fail to Transform</h2>
+          <h2 class="heading">Why Most Men Fail to Transform Their Body</h2>
           <p class="lead">
-            It’s not a lack of effort — it’s the wrong approach: too much
-            volume, too many distractions, and plans designed to sell products,
-            not deliver results.
+            The fitness industry thrives on your confusion. If you always need
+            the next supplement, the next PDF, the next hack, you never realize
+            the scam. The truth requires no gimmick. It requires only effort,
+            recovery, and consistency.
           </p>
         </div>
 
         <div class="grid grid-4" style="margin-top: 18px">
           <div class="card">
             <div class="check"></div>
+            <span style="margin-left: 8px"></span>
+              They confuse activity with progress.
+            </span>
+          </div>
+          <div class="card">
+            <div class="check"></div>
+            <span style="margin-left: 8px">They fall for industry hype.</span>
+          </div>
+          <div class="card">
+            <div class="check"></div>
             <span style="margin-left: 8px"
-              >Training too often, not intensely enough.</span
+              >They burn out chasing extremes.</span
             >
           </div>
           <div class="card">
             <div class="check"></div>
             <span style="margin-left: 8px"
-              >Following influencer routines built to sell supplements.</span
+              >They are Always starting "from Monday", always changing routines
+              and diets. Not finding something that simply works and sticking
+              with it.</span
             >
           </div>
-          <div class="card">
-            <div class="check"></div>
-            <span style="margin-left: 8px"
-              >Wasting hours “optimising” instead of training effectively.</span
-            >
+        </div>
+
+        <!-- Truth call‑out: supplements & "optimal" diets  -->
+        <div class="card" style="margin-top: 16px; background: #fcfefd">
+          <div
+            style="
+              font-weight: 900;
+              color: var(--green-ink);
+              margin-bottom: 6px;
+            "
+          >
+            If a diet needs supplements to cover its deficiencies, it isn’t
+            healthy.
           </div>
-          <div class="card">
-            <div class="check"></div>
-            <span style="margin-left: 8px"
-              >Living in the gym while life passes by.</span
-            >
+          <div
+            class="mini"
+            style="color: #2e3338; text-transform: none; letter-spacing: 0"
+          >
+            Real food should meet your needs. Supplements can
+            <b>supplement</b>, not substitute. If a plan only “works” with a
+            shopping list of powders and pills, the plan is broken.
           </div>
         </div>
 
@@ -603,41 +643,41 @@
       <div class="container grid grid-2">
         <div>
           <h2 class="heading">
-            The Prime Form Method — Built for Busy Beginners
+            The Prime Form Method: Do What Nature Requires, No More, No Less.
           </h2>
           <p class="lead">
-            A focused, minimalist system for rapid, sustainable transformation.
-            Train harder for shorter periods, recover fully, progress every
-            week.
+            A focused, minimalist system for rapid, sustainable Progress. Train
+            harder for shorter periods, recover fully, enjoy your life and
+            hobbies.
           </p>
 
           <ul style="list-style: none; padding: 0; margin: 12px 0 0 0">
             <li style="display: flex; gap: 10px; margin: 10px 0">
               <div class="check"></div>
               <span
-                ><b>Focused Training</b> — 2–3 short, efficient sessions;
+                ><b>Focused Training</b> 2–3 short, efficient sessions;
                 intensity over volume.</span
               >
             </li>
             <li style="display: flex; gap: 10px; margin: 10px 0">
               <div class="check"></div>
               <span
-                ><b>Smart Nutrition</b> — Practical, flexible guidelines; no
-                starvation or gimmicks.</span
+                ><b>Smart Nutrition</b> Practical, flexible guidelines; no
+                starvation or heavily restrictive diets.</span
               >
             </li>
             <li style="display: flex; gap: 10px; margin: 10px 0">
               <div class="check"></div>
               <span
-                ><b>Visible Results</b> — Muscle gain + fat loss without losing
-                evenings to the gym.</span
+                ><b>Visible Results</b> Muscle gain + fat loss without hijacking
+                all of your free time to the gym.</span
               >
             </li>
             <li style="display: flex; gap: 10px; margin: 10px 0">
               <div class="check"></div>
               <span
-                ><b>Beginner Proof</b> — Form-first, clear instruction,
-                trackable progression.</span
+                ><b>Beginner Proof</b> Form-first, clear instruction, trackable
+                progression.</span
               >
             </li>
           </ul>
@@ -715,8 +755,10 @@
             </div>
           </div>
           <div class="card" style="margin-top: 12px; background: #fcfefd">
-            <b style="color: var(--green)">Note:</b> This is not a lifestyle
-            overhaul. It’s a system you can actually stick with.
+            <b style="color: var(--green)">Note:</b> The purpose of training is
+            not to see how much work you can tolerate, but to stimulate the body
+            just enough to trigger growth, and then stop. Anything beyond that
+            is wasted energy that delays recovery.
           </div>
         </div>
       </div>
@@ -728,8 +770,7 @@
         <div style="text-align: center">
           <h2 class="heading">Real Results. No Excuses.</h2>
           <p class="lead">
-            Short, efficient training that respects your time — and changes how
-            you look in the mirror.
+            The man who learns to do less but better, advances further than the man who tries to do everything.
           </p>
         </div>
 
@@ -737,15 +778,10 @@
         <div class="grid grid-2" style="margin-top: 16px">
           <div class="card">
             <img
+              class="proof-beforeafter"
               src="Before after minimal skincare Instagram post.jpg"
               alt="Before and after transformation — client of Dimitar Yanchev"
               loading="lazy"
-              style="
-                width: 100%;
-                aspect-ratio: 16/9;
-                object-fit: cover;
-                border-radius: 12px;
-              "
             />
             <div class="mini" style="margin-top: 8px">
               8 weeks — before & after.
@@ -764,7 +800,7 @@
               "
             />
             <div class="mini" style="margin-top: 8px">
-              Back development built with focused pulling and recovery.
+              Back development built with high intensity training and proper recovery.
             </div>
           </div>
         </div>
@@ -775,21 +811,20 @@
               “I train 90 minutes a week. Dropped 8kg and look better than
               ever.”
             </p>
-            <div class="mini" style="margin-top: 10px">Dan, 38</div>
+            <div class="mini" style="margin-top: 10px">Nikola, 38</div>
           </div>
           <div class="card">
             <p>
-              “Finally a program I can stick to. Fast progress without losing my
-              evenings.”
+              “Finally a program I can stick to. Fast progress without wasting my
+              time.”
             </p>
             <div class="mini" style="margin-top: 10px">Khalid, 32</div>
           </div>
           <div class="card">
             <p>
-              “I wasted years on influencer plans. This cut through the noise
-              and worked.”
+              “I wasted years tying stuff.. this is so simple but it works.”
             </p>
-            <div class="mini" style="margin-top: 10px">Marcus, 41</div>
+            <div class="mini" style="margin-top: 10px">MatT, 41</div>
           </div>
         </div>
 
@@ -805,33 +840,31 @@
         <div>
           <h2 class="heading">About Me</h2>
           <p class="lead">
-            I train men who are done with excuses and finally ready to commit.
-            Not “thinking about it.” Not “starting Monday.” Commit. Because the
-            truth is, you’re not too busy — you’ve just been sold the lie that
-            health is optional. It isn’t.
+            I train brothers who are done with excuses and finally ready to commit.
+            Who are tired of following trends and “starting on Monday.” 
           </p>
           <p class="lead">
             Here’s the part no one likes to say out loud: fitness is an
-            industry. And industries don’t care about your long-term health —
+            industry. And industries don’t care about your long-term health, 
             they care about keeping you on the hook. They hype magic powders,
             flashy programs, and influencer routines that leave you drained and
-            doubting yourself. They push “more” — more supplements, more
-            workouts, more optimization — until you’re burnt out and convinced
+            doubting yourself. They push “more” more supplements, more
+            workouts, more optimization... until you’re burnt out and convinced
             you’re the problem.
           </p>
           <p class="lead"><b>You’re not the problem.</b></p>
           <p class="lead">
-            My approach is different. Minimalist. Focused. Human. I strip away
-            the nonsense and give you exactly what works, so you don’t have to.
-            Training and nutrition built for your lifestyle and your goals. No
-            ten-step rituals. No two-hour daily workouts. Just the essentials
-            that move the needle — then you get back to living your life.
+            My approach is different. Minimalist. Focused. Human. Intense. I strip away
+            the nonsense and give you exactly what works, so you don’t have to spend years of 
+            learning trying to find it yourself.
+            Training and nutrition built for your lifestyle and your goals. Doing Exactly what is required
+            in order to achieve sustainable progress, and then you get back to living your life.
           </p>
           <p class="lead">
             Fitness isn’t meant to take over your existence. It’s meant to make
             your existence better. If you’re ready to stop being a cog in the
             industry machine and start building muscle, burning fat, and getting
-            healthy — I’ll show you the way. No gimmicks. No tricks.
+            healthy, I’ll show you the way. 
           </p>
           <p class="lead">
             <b
@@ -854,10 +887,9 @@
     <section id="offer" class="soft">
       <div class="container">
         <div style="text-align: center">
-          <h2 class="heading">Choose Your Path</h2>
+          <h2 class="heading">How You Can Work With Me</h2>
           <p class="lead">
-            Clear options. No gimmicks. Programs for momentum, coaching for
-            mastery.
+            My Programs let you invest in proven methods. Coaching lets you invest in certainty.
           </p>
         </div>
 
@@ -877,7 +909,7 @@
             </div>
             <p class="lead" style="font-size: 14px; margin-top: 8px">
               Minimalist transformation training (2–3 sessions/week). Built for
-              busy beginners.
+              busy Men.
             </p>
             <ul style="list-style: none; padding: 0; margin: 10px 0 0 0">
               <li style="display: flex; gap: 10px; margin: 8px 0">
@@ -921,11 +953,11 @@
                 margin-top: 4px;
               "
             >
-              Prime Form: Lean Blueprint
+              Prime Form: Nutrition Blueprint
             </div>
             <p class="lead" style="font-size: 14px; margin-top: 8px">
               Nutrition & fat‑loss system for busy men. Simple rules, visible
-              change.
+              change. Well Balanced Diet.
             </p>
             <ul style="list-style: none; padding: 0; margin: 10px 0 0 0">
               <li style="display: flex; gap: 10px; margin: 8px 0">
@@ -997,11 +1029,11 @@
                 justify-content: space-between;
               "
             >
-              <div class="mini"><b>£97</b> one‑time</div>
+              <div class="mini"><b>£67</b> one‑time</div>
               <a
                 class="btn btn-cta"
                 href="mailto:dimitaryanchevv@gmail.com?subject=Purchase:%20Prime%20Form%20Starter%20Pack%20(GBP%2097)&body=Hi%20Dimitar,%0A%0AI'd%20like%20to%20purchase%20the%20Prime%20Form%20Starter%20Pack%20(GBP%2097).%0AName:%20%0AEmail:%20%0A"
-                >Purchase Program</a
+                >Purchase Bundle</a
               >
             </div>
           </div>
@@ -1025,8 +1057,12 @@
                 Prime Form Mentorship (1:1 Coaching)
               </div>
               <p class="lead" style="font-size: 14px; margin-top: 8px">
-                Direct access to me. Custom plan, weekly progress checks,
-                message‑first support.
+                Information alone is not enough. The real edge comes from
+                accountability and precision. In Mentorship, every detail is
+                tailored to you: your recovery capacity, your schedule, your
+                sticking points. I read your progress, adjust, and direct you
+                weekly. You don’t waste energy guessing if you’re doing it right
+                — you know.
               </p>
               <ul style="list-style: none; padding: 0; margin: 10px 0 0 0">
                 <li style="display: flex; gap: 10px; margin: 8px 0">
@@ -1054,7 +1090,7 @@
               <div class="mini"><b>£247/month</b> · limited spots</div>
               <a class="btn btn-cta" href="#apply">Start My Assessment</a>
               <div class="mini">
-                If we’re a fit, you’ll be invited to join. No pressure.
+                Subject to availability, you may be invited to join.
               </div>
             </div>
           </div>
@@ -1126,7 +1162,7 @@
             <ul style="margin-top: 6px; padding-left: 18px">
               <li>I read your details and reply personally.</li>
               <li>If it’s a fit, you’ll get a simple plan to start.</li>
-              <li>WhatsApp support is reserved for coaching clients.</li>
+              <li>WhatsApp 24/7 support is reserved for coaching clients.</li>
             </ul>
           </div>
         </div>
