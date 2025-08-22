@@ -51,6 +51,7 @@
       html,
       body {
         margin: 0;
+        overflow-x: hidden; /* prevent horizontal nudge/scroll on iOS zoom + full-bleed tricks */
       }
       body {
         font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
@@ -139,13 +140,15 @@
         background: #ffffffcc;
         backdrop-filter: saturate(140%) blur(8px);
         border-bottom: 1px solid var(--border);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
       }
       /* Make header content full-width on mobile (no 90% look) */
       header > .container {
-        max-width: 100%;
-        width: 100%;
-        padding-left: env(safe-area-inset-left);
-        padding-right: env(safe-area-inset-right);
+        max-width: none; /* let it span fully */
+        width: 100%; /* track header width */
+        padding-left: 0; /* no extra gutters here */
+        padding-right: 0;
       }
       .brand {
         display: flex;
@@ -429,7 +432,7 @@
     <!-- ================= HEADER ================= -->
     <header>
       <div
-        class="container full-bleed"
+        class="container"
         style="
           display: flex;
           align-items: center;
@@ -1502,7 +1505,7 @@
 
     <!-- ================= STICKY CTA (mobile) ================= -->
     <div class="sticky-cta">
-      <div class="container full-bleed" style="padding: 0">
+      <div class="container" style="padding: 0">
         <a class="btn btn-cta" href="#apply" style="width: 100%"
           >Start My Assessment</a
         >
