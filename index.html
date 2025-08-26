@@ -220,6 +220,65 @@
         background: var(--surface-soft);
       }
 
+      /* Subtle section background image */
+      .section-bg {
+        position: relative;
+        overflow: hidden;
+      }
+      .section-bg > .container {
+        position: relative;
+        z-index: 1;
+      }
+      .section-bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(11, 11, 11, 0.75),
+            rgba(11, 11, 11, 0.75)
+          ),
+          url("9A03E4BB-EC1F-47EC-81E3-C864722C934E_1_105_c.jpeg") center/cover
+            no-repeat;
+        opacity: 0.22; /* very subtle */
+        filter: grayscale(100%) contrast(1.05);
+        pointer-events: none;
+      }
+      @media (min-width: 900px) {
+        .section-bg::before {
+          opacity: 0.18;
+        }
+      }
+
+      /* About section background image */
+      .about-bg {
+        position: relative;
+        overflow: hidden;
+      }
+      .about-bg > .container {
+        position: relative;
+        z-index: 1;
+      }
+      .about-bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(11, 11, 11, 0.7),
+            rgba(11, 11, 11, 0.7)
+          ),
+          url("IMG_9098.jpeg") center/cover no-repeat;
+        opacity: 0.22;
+        filter: grayscale(100%) contrast(1.05);
+        pointer-events: none;
+      }
+      @media (min-width: 900px) {
+        .about-bg::before {
+          opacity: 0.18;
+        }
+      }
+
       /* Header */
       header {
         position: sticky;
@@ -555,7 +614,7 @@
         "
       >
         <div class="brand">
-          <img src="IMG_0071.jpeg" alt="Dimitar Yanchev" class="logo" />
+          <img src="IMG_3627.jpeg" alt="Dimitar Yanchev" class="logo" />
           <div>
             <div class="name">Dimitar Yanchev</div>
             <div class="role">Body Transformation Specialist</div>
@@ -612,7 +671,7 @@
             <div class="hero">
               <img
                 class="hero-img"
-                src="IMG_2407.jpg"
+                src="IMG_0071.jpeg"
                 alt="Dimitar Yanchev"
                 decoding="async"
                 fetchpriority="high"
@@ -633,7 +692,7 @@
     </section>
 
     <!-- ================= PROBLEM ================= -->
-    <section class="soft" id="problem">
+    <section class="soft section-bg" id="problem">
       <div class="container">
         <div style="text-align: center">
           <h2 class="heading">Why Most Men Don’t Change</h2>
@@ -831,7 +890,7 @@
     </section>
 
     <!-- ================= ABOUT ================= -->
-    <section id="about">
+    <section id="about" class="about-bg">
       <div class="container grid grid-2">
         <div>
           <h2 class="heading">About Me</h2>
@@ -1604,13 +1663,26 @@
         const hero = document.querySelector(".hero-img");
         if (!hero) return;
         const baseNames = [
+          "IMG_0071.jpeg",
+          "IMG_0071.jpg",
+          "img_0071.jpeg",
+          "img_0071.jpg",
+          "IMG_2389.jpeg",
+          "IMG_2389.jpg",
+          "img_2389.jpeg",
+          "img_2389.jpg",
+          "sunset.jpg",
+          "sunset.jpeg",
+          "Sunset.jpg",
+          "Sunset.jpeg",
+          "IMG_2407.jpg",
           "IMG_2407.jpeg",
           "IMG_2407.JPG",
-          "IMG_2407.jpg",
           "IMG_2407.JPEG",
+          "img_2407.jpg",
           "img_2407.jpeg",
           "img_2407.JPG",
-          "img_2407.jpg",
+          "img_2407.JPEG",
           "IMG_2407.png",
           "img_2407.png",
         ];
@@ -1618,6 +1690,31 @@
           if (found)
             hero.src = found + (found.includes("?") ? "" : "?cb=" + Date.now());
           else console.warn("[hero-img] No candidate resolved");
+        });
+      })();
+
+      // LOGO IMAGE fallback (tie-face icon preferred)
+      (function () {
+        const logo = document.querySelector("img.logo");
+        if (!logo) return;
+        const baseNames = [
+          "IMG_3627.jpeg",
+          "IMG_3627.jpg",
+          "img_3627.jpeg",
+          "img_3627.jpg",
+          "icon_tie.jpg",
+          "icon_tie.jpeg",
+          "icon-tie.jpg",
+          "icon-tie.jpeg",
+          "tie.jpg",
+          "tie.jpeg",
+          "Tie.jpg",
+          "Tie.jpeg",
+        ];
+        resolveImagePath(baseNames).then((found) => {
+          if (found)
+            logo.src = found + (found.includes("?") ? "" : "?cb=" + Date.now());
+          else console.warn("[logo] No candidate resolved");
         });
       })();
 
